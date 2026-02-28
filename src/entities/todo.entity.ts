@@ -1,8 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne} from "typeorm";
-import { UserEntity} from "../entities/user.entity.js";
+import UserEntity from "./user.entity.js"
 
 @Entity()
-
 export class TodoEntity {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -11,10 +10,10 @@ export class TodoEntity {
   title: string;
 
   @Column({ type: "boolean", default: false})
-  completed!: "boolean";
+  completed!: boolean;
 
   @Column ({ type: "text", nullable: true})
-  description: string;
+  description?: string;
 
   @Column({type: "timestamp", default: ()=> "CURRENT_TIMESTAMP"})
   createdAt!: Date;
@@ -22,8 +21,8 @@ export class TodoEntity {
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP"})
   updatedAt!: Date;
 
-  @ManyToOne(() => UserEntity, (user) => user.todos, {onDelete: "CASCADE"})
-  user!: UserEntity;
+  @ManyToOne(()=> UserEntity, (user) => user.todos, {onDelete: "CASCADE"})
+  user!:  Promise<UserEntity>; 
 }
 
 export default TodoEntity;

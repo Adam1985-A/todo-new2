@@ -18,11 +18,7 @@ const AppDataSource = new DataSource({
   ssl: process.env.NODE_ENV === "production" 
   ?{ rejectUnauthorized: false}
   :false,
-  entities: [
-    process.env.NODE_ENV ==="production"
-    ? "dist/entity/*.js"
-    : "src/entity/*.ts"
-  ],
+  entities: [UserEntity, TodoEntity],
   migrations: [],
   subscribers: [],
 });

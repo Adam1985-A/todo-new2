@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { TodoEntity } from "../entities/todo.entity.js";
+import TodoEntity from "./todo.entity.js";
+
 
 @Entity()
 export class UserEntity{
@@ -21,8 +22,9 @@ export class UserEntity{
   @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP", onUpdate: "CURRENT_TIMESTAMP"})
   updatedAt!: Date;
 
-  @OneToMany(() => TodoEntity, (todo) => todo.user)
-  todos!: TodoEntity[];
+ @OneToMany(()=> TodoEntity, (todo)=> todo.user)
+ todos!: Promise<TodoEntity[]>;
+
 
 }
 
